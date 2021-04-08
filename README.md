@@ -41,5 +41,16 @@ The participant will support the following user commands (format of the command 
 As mentioned before, the coordinator manages the multicast group, handles all communication, and stores messages for persistence. For simplicity, it is assumed that there is only one multicast group and all registered participants belong to the same group. The coordinator program will have one command-line parameter, namely, the configuration file name. The configuration file will have the following format. The first line indicates the port number where the coordinator will wait for incoming messages from participants. The second line indicates the persistence time threshold (td) in seconds. When the coordinator starts up, the multicast group is assumed to be empty. Participants join the group through register messages. When the coordinator gets a message from a participant, it first parses the message, acknowledges the receipt of the message, closes the connection, and then performs the requested action. For example, if it receives a “register” message, it will add the participant to the member list. If it receives a multicast message, it will send the message to the members that are currently online. If any members are offline, it will store the message for providing persistence. 
 
 
+## Execution Instructions-
 
+1. The "participant.jar" executable creates a message-log.txt file adjacent to it to show all the multicast group communication.
+2. Make sure that participant.jar and its config file stay together in same folder.
+3. Make sure that coordinator.jar and its config file stay together in same folder.
+4. Please do not change config file's format (i.e key=value pairs). However, the sequence of config properties can be interchanged.
+   For reference you can check the config files provided in submission zip folder.
+5. Command for coordinator execution
+     java -jar coordinator.jar <Config File Name>
+
+   Command for participant execution
+     java -jar participant.jar <Config File Name>
 
