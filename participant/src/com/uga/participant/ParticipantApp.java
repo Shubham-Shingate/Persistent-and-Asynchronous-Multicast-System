@@ -20,11 +20,20 @@ public class ParticipantApp {
 	
 	public static void main(String[] args) throws IOException {
 		
+		if (args.length != 1) {
+			System.err.println("Pass the config file name for participant execution as the command line argument only");
+			return;
+		}
+		
 		/** --------Load the properties file into the application-------- */
 		appProperties = new Properties();
 		registration = "Enabled";
 		
-		File propertyFile = new File("PP3-participant-conf.txt");
+		File propertyFile = new File(args[0]);
+		if (!propertyFile.exists()) {
+			System.err.println("The property file with the given name does not exists");
+			return;
+		}
 		FileInputStream fis = new FileInputStream(propertyFile);
 		try {
 			appProperties.load(fis);
